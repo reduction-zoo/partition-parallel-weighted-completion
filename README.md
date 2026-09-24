@@ -1,24 +1,39 @@
 # Partition → Parallel-machine weighted completion time
 
-Independent research campaign. A published Partition-to-two-machine weighted-completion construction has been reconstructed as executable forward and recovery maps, with a general proof and independent review. The result is ready for expert review; it is not a new hardness classification.
+**Status:** `ready_for_expert_review` · **Research model:** `gpt-6-sol` · **Submitted:** 2026-09-24
 
-[State](campaigns/partition-parallel-weighted-completion/state.md) · [Question](campaigns/partition-parallel-weighted-completion/question.md) · [Proof](campaigns/partition-parallel-weighted-completion/work/proof.md) · [Paper](campaigns/partition-parallel-weighted-completion/work/manuscript.pdf) · [Independent review](campaigns/partition-parallel-weighted-completion/reviews/followup/review.md)
+This archive reconstructs a published Partition-to-two-machine weighted-completion reduction as deterministic polynomial-time construction and recovery maps. Every valid target schedule yields a Partition witness; a valid target `NO-SOLUTION` yields source `NO-SOLUTION`. It does not claim a new hardness result.
 
-With source numbers `a_i`, let `S=sum a_i` and `Q=sum a_i²`. Create two machines and jobs with `p_i=w_i=2a_i`; set `K=2Q+S²`. Every schedule costs at least `K+(L_0-L_1)²`, where `L_0,L_1` are the source-number loads on its machines. At or below `K`, machine membership gives a Partition witness. Target `NO-SOLUTION` gives source `NO-SOLUTION`.
+## Construction
 
-Reproduce with Python 3.12, uv 0.12.17, Z3 binding 5.1.0.0 and Typst 0.15.1:
+For positive source integers `a_i`, create two machines and one job per integer with processing time and weight `p_i = w_i = 2a_i`. Set `K = 2Σa_i² + (Σa_i)²`. Every schedule costs at least `K` plus the square of the difference between its two source-number loads. A schedule meeting `K` therefore has equal loads, and either machine's jobs give a partition. The decoder uses machine assignments, so arbitrary job order and idle time do not affect recovery.
+
+## Evidence
+
+- **Mathematical correctness and recovery: written proof; independent agent review advanced.** The proof covers all legal inputs and every valid target output, including `NO-SOLUTION`. The reviewer found no remaining correctness gap after a large-integer I/O repair. Human expert acceptance is pending. ([review](campaigns/partition-parallel-weighted-completion/reviews/followup/review.md))
+- **Construction and recovery complexity: written polynomial bounds.** The proof gives polynomial runtime and encoding size for both maps. The construction is the published reduction of Lenstra, Rinnooy Kan and Brucker (1977), Theorem 3(b), up to scaling. ([proof](campaigns/partition-parallel-weighted-completion/work/proof.md))
+- **Executable verification: finite checks passed.** Z3 and an independent subset-DP solver each checked 120 source instances and 150 valid target outputs, including alternate schedules and no-solution cases. Large-integer recovery checks also passed. These checks supplement, but do not replace, the general proof. ([verification](campaigns/partition-parallel-weighted-completion/work/verification.md))
+- **Formal certification and maintainer acceptance: not performed.** No Lean certificate, human expert acceptance, or upstream integration is recorded. ([state](campaigns/partition-parallel-weighted-completion/state.md))
+
+## Reproduce
+
+Run from the repository root:
 
 ```sh
 uv sync --locked
-uv run research/validate_preparation.py campaigns/partition-parallel-weighted-completion/work/cases.json
-cd campaigns/partition-parallel-weighted-completion/work
-uv run check.py --self-test
-uv run check.py --candidate algorithm.py
-uv run verify.py --candidate algorithm.py
-uv run ../reviews/initial/check_large.py
-typst compile manuscript.typ manuscript.pdf
+uv run --locked python campaigns/partition-parallel-weighted-completion/work/check.py --candidate campaigns/partition-parallel-weighted-completion/work/algorithm.py
+uv run --locked python campaigns/partition-parallel-weighted-completion/work/verify.py --candidate campaigns/partition-parallel-weighted-completion/work/algorithm.py
+uv run --locked python campaigns/partition-parallel-weighted-completion/reviews/initial/check_large.py
 ```
 
-Both candidate checks passed 120 instances and 150 target outputs each. These finite checks supplement the proof; the [verification record](campaigns/partition-parallel-weighted-completion/work/verification.md) states their limits.
+The finite checks exercise the executable construction and recovery maps. The general claim rests on the written proof.
 
-Board source commit: d56f22aee71c281b1a9b7aa90e65a0d2607efdce.
+## Artifacts
+
+- [Fixed question](campaigns/partition-parallel-weighted-completion/question.md)
+- [Campaign state](campaigns/partition-parallel-weighted-completion/state.md)
+- [Manuscript](campaigns/partition-parallel-weighted-completion/work/manuscript.pdf)
+- [Construction and recovery](campaigns/partition-parallel-weighted-completion/work/algorithm.py)
+- [General proof](campaigns/partition-parallel-weighted-completion/work/proof.md)
+- [Independent review](campaigns/partition-parallel-weighted-completion/reviews/followup/review.md)
+- [Verification evidence](campaigns/partition-parallel-weighted-completion/work/verification.md)
