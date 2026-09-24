@@ -12,8 +12,16 @@ First discriminating check: build a candidate from the exact quadratic identity 
 
 ## Evidence and diagnosis
 
-Pending.
+The proposed identity is exact: with `p_i=w_i=2a_i`, any schedule has cost at least `K+(L_0-L_1)^2`, where `K=2Σa_i²+(Σa_i)²`. The proof covers arbitrary job order and idle time. `algorithm.py` constructs the target and decodes every valid schedule by machine membership; target NO-SOLUTION maps to source NO-SOLUTION by the proved equivalence. The candidate's bit lengths and runtime are polynomial, as detailed in [proof](../../work/proof.md).
+
+The prepared Z3 check passed 120 source instances (30 YES, 90 NO) and 150 target outputs (30 alternate valid schedules). [Independent subset-DP verification](../../work/verification.md) passed the same counts with a distinct target solver. No mismatch was observed. This finite result supports implementation behavior; the general claim rests on the algebraic proof.
+
+Literature check on 2026-09-23: [upstream issue #480](https://github.com/CodingThrust/problem-reductions/issues/480) describes `m=2`, `p_i=w_i=a_i` and load balancing, but its bound is truncated/inexact in the visible text and it does not give a complete output decoder. [Shmoys's scheduling notes, Theorem 4.13](https://people.orie.cornell.edu/shmoys/or6335/chapter5.pdf) show the equal processing/weight completion-cost identity in a different single-machine release-date reduction; they mention parallel-machine extension but do not present this exact two-machine rule. The mechanism is therefore an explicit reconstruction of a known idea, with an independently derived exact positive-integer bound and recovery proof, not a claimed novel hardness result.
+
+Observation: equal loads are forced by the threshold. Supported cause: the packed cost equals a constant plus the squared load difference, while idle time cannot lower cost. Consequence: no second construction mechanism is needed if independent review accepts the proof.
+
+Experience extraction: [equal processing/weight load-square lemma](../../../../research/experience/equal_processing_weight_load_square.md) created 2026-09-23; applicable beyond this particular source problem. No board file was edited.
 
 ## Next action
 
-Implement and test the proposed construction and recovery.
+Request fresh independent review, then write and inspect the paper if the review advances the candidate.
