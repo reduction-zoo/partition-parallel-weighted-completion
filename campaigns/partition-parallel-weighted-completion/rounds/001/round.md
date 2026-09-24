@@ -20,7 +20,7 @@ Literature check on 2026-09-23: [upstream issue #480](https://github.com/CodingT
 
 The [initial independent review](../../reviews/initial/review.md) found a genuine implementation defect: CPython's default decimal-digit cap caused `json.dump` to fail when squaring a legal 8192-bit input. [The retained reproducer](../../reviews/initial/check_large.py) failed with `ValueError` before repair. The arithmetic theorem and 120-case results were unaffected; the all-input executable claim was not. The CLI now disables that cap before both JSON parsing and serialization. This is an implementation repair in the same mechanism, not a new round.
 
-After the repair, the high-bit reproducer and 16384-bit forward/recovery subprocess checks passed. Both 120-instance suites were rerun and again passed 150 target outputs each. The exact command and coverage are in [verification](../../work/verification.md). Focused independent re-review remains pending.
+After the repair, the high-bit reproducer and 16384-bit forward/recovery subprocess checks passed. Both 120-instance suites were rerun and again passed 150 target outputs each. The exact command and coverage are in [verification](../../work/verification.md). [Focused independent re-review](../../reviews/followup/review.md) advanced the repaired candidate. The reviewed [Typst paper](../../work/manuscript.pdf) compiled and all three pages were visually inspected on 2026-09-23.
 
 Observation: equal loads are forced by the threshold. Supported cause: the packed cost equals a constant plus the squared load difference, while idle time cannot lower cost. Consequence: no second construction mechanism is needed if independent review accepts the proof.
 
@@ -28,4 +28,4 @@ Experience extraction: [equal processing/weight load-square lemma](../../../../r
 
 ## Next action
 
-Request fresh independent review, then write and inspect the paper if the review advances the candidate.
+Round closed supported. Recommend expert review of the complete reconstruction. No construction or proof obligation remains within this campaign; formalization was not requested. One round and one distinct mechanism were used from the 20-round allocation. Further optional optimization is not needed for the fixed acceptance criteria.

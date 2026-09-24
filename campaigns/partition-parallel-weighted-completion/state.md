@@ -1,5 +1,6 @@
 # Campaign state
 
+Status: `ready_for_expert_review` (agent assessment, 2026-09-23).
 Budget: 20 rounds. Used: 1. Remaining: 19. Distinct construction mechanisms: 1.
 Board source: d56f22aee71c281b1a9b7aa90e65a0d2607efdce.
 
@@ -8,7 +9,9 @@ Prepare: [contract](work/contract.md), [120 fixed cases](work/cases.json), [orac
 Current claim: complete executable F and G with a general proof in [work/proof.md](work/proof.md). Exact threshold `K=2Σa_i²+(Σa_i)²`; every valid target schedule recovers a balanced subset. Correctness: [focused independent review](reviews/followup/review.md) advanced the repaired map after the [initial review](reviews/initial/review.md) found a CPython integer I/O defect. Novelty: [Lenstra, Rinnooy Kan and Brucker (1977), Theorem 3(b)](https://ir.cwi.nl/pub/18051/18051A.pdf) already gives the same reduction up to scaling; the contribution is an executable reconstruction and decoder, not a new hardness classification. Significance: compact one-job-per-number benchmark meeting the fixed reconstruction task, per independent review.
 Checks: [Prepare](work/preparation.md) passed; [Z3 and independent subset-DP verification](work/verification.md) each passed 120 instances and 150 target outputs both before and after repair. The [high-bit reproducer](reviews/initial/check_large.py) failed before repair and passed afterward; 16384-bit forward and recovery subprocess checks also passed. These are finite checks, not general proof.
 Experience: 1 [entry](../../research/experience/equal_processing_weight_load_square.md) created and updated, 0 pending.
-Next action: write, compile and inspect the Typst manuscript, then close out the campaign.
+Manuscript: [Typst source](work/manuscript.typ) and [PDF](work/manuscript.pdf). Compiled with Typst 0.15.1 and all three rendered pages visually inspected 2026-09-23; no clipping, unreadable notation or broken page layout observed. No structural figure was needed for this one-identity construction. Reproduction commands and finite scope are in the appendix and [README](../../README.md).
+Round closure: [round 001](rounds/001/round.md) supported, with two independent target solvers, a repaired high-bit counterexample, and an advance independent review. One distinct experience entry created and updated; no pending promotion or contradictory evidence. Prospects within remaining budget: high for this rule-completion task because all required artifacts exist and were reviewed; this judgment is uncalibrated. No further discovery round is needed.
+Remaining decision: expert review may assess the paper and implementation. No formal verification was requested. No board update, remote, or publication was made.
 
 | Round | Mechanism / scope | First check | Outcome | Evidence |
 |---|---|---|---|---|
