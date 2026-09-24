@@ -3,6 +3,9 @@
 import json
 import sys
 
+if hasattr(sys, "set_int_max_str_digits"):
+    sys.set_int_max_str_digits(0)
+
 
 def numbers_from(source):
     numbers = source["numbers"]

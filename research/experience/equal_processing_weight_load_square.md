@@ -8,7 +8,7 @@ For nonpreemptive identical-machine scheduling with zero release times, positive
 
 ## Evidence and status
 
-General algebraic lemma proved in [round 001 proof](../../campaigns/partition-parallel-weighted-completion/work/proof.md); independently tested on the campaign's finite corpus in [verification](../../campaigns/partition-parallel-weighted-completion/work/verification.md). Pending independent review. The [upstream issue](https://github.com/CodingThrust/problem-reductions/issues/480) already mentions equal lengths and weights and load balancing, so this entry claims no novelty for the basic idea.
+General algebraic lemma proved in [round 001 proof](../../campaigns/partition-parallel-weighted-completion/work/proof.md); independently tested on the campaign's finite corpus in [verification](../../campaigns/partition-parallel-weighted-completion/work/verification.md). The [initial independent review](../../campaigns/partition-parallel-weighted-completion/reviews/initial/review.md) confirmed the mathematical identity and found the same construction in [Lenstra, Rinnooy Kan and Brucker (1977), Theorem 3(b)](https://ir.cwi.nl/pub/18051/18051A.pdf). This entry claims no novelty for the lemma.
 
 ## Consequence for search
 
